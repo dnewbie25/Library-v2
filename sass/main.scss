@@ -1,0 +1,34 @@
+@import "./config", "./card";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  width: 100%;
+  height: auto;
+}
+
+body{
+  background-color: $primary-bg;
+}
+
+h1{
+  font-family: $font-title;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  margin-top: $margin-2;
+}
+
+main{
+  margin: $margin-4;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 345px);
+  gap: $margin-4;
+  @media (max-width:700px) {
+    grid-template-columns: 1fr;
+  }
+}

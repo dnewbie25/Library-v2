@@ -1,0 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Patrick+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Patrick+Hand&display=swap");
+.book {
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+  border: 4px solid #CAD6E2;
+  font-size: 1.2rem;
+}
+
+.book * {
+  font-family: "Patrick Hand", cursive;
+}
+
+.book-title {
+  border-bottom: 4px solid #CAD6E2;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.book-info {
+  margin: 1rem;
+  background-color: #227BE5;
+  border: 3px solid #003169;
+  border-radius: 10px;
+  padding: 0 1rem;
+  color: white;
+  font-size: 1.4rem;
+}
+
+.book-info * {
+  padding: 10px 0;
+}
+
+.book-info__data .author {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60px 1fr;
+      grid-template-columns: 60px 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.book-info__data .author__name {
+  background-color: white;
+  color: #003169;
+  border: 3px solid #003169;
+  border-radius: 10px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+}
+
+.book-info__data .pages {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60px 1fr;
+      grid-template-columns: 60px 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  text-align: right;
+}
+
+.book-info__data .pages__number {
+  background-color: white;
+  color: #003169;
+  border: 3px solid #003169;
+  border-radius: 10px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+}
+
+.book-info__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.book-info__buttons p {
+  -ms-flex-preferred-size: 60px;
+      flex-basis: 60px;
+  text-align: right;
+}
+
+.book-info__buttons button {
+  width: 80px;
+  border: 3px solid #003169;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-transition: all 100ms;
+  transition: all 100ms;
+  padding: 0;
+}
+
+.book-info__buttons button span {
+  display: block;
+  width: 100%;
+  height: 1.2rem;
+  margin: 3px 0;
+  color: white;
+}
+
+.book-info__buttons button span.checked {
+  background: url("./../images/check.svg") no-repeat center;
+}
+
+.book-info__buttons button span.x-mark {
+  background: url("./../images/x-mark.svg") no-repeat center;
+}
+
+.book-info__buttons button.read {
+  background-color: #2EB394;
+  -webkit-box-shadow: 0px 0px 0px 2px #2EB394;
+          box-shadow: 0px 0px 0px 2px #2EB394;
+}
+
+.book-info__buttons button.read:hover {
+  -webkit-box-shadow: 0px 0px 20px 2px #12f5c0;
+          box-shadow: 0px 0px 20px 2px #12f5c0;
+}
+
+.book-info__buttons button.read:active {
+  -webkit-box-shadow: 0px 0px 8px #12f5c0;
+          box-shadow: 0px 0px 8px #12f5c0;
+}
+
+.book-info__buttons button.not-read {
+  background-color: #EA3D32;
+  -webkit-box-shadow: 0px 0px 0px 2px #EA3D32;
+          box-shadow: 0px 0px 0px 2px #EA3D32;
+}
+
+.book-info__buttons button.not-read:hover {
+  -webkit-box-shadow: 0px 0px 20px 2px #97251d;
+          box-shadow: 0px 0px 20px 2px #97251d;
+}
+
+.book-info__buttons button.not-read:active {
+  -webkit-box-shadow: 0px 0px 8px #97251d;
+          box-shadow: 0px 0px 8px #97251d;
+}
+
+.book-info__buttons button.delete {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 30px;
+  background-color: #e49606;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  padding: 0 10px;
+  font-weight: bold;
+  -webkit-box-shadow: 0px 0px 0px 2px #e49606;
+          box-shadow: 0px 0px 0px 2px #e49606;
+}
+
+.book-info__buttons button.delete:hover {
+  -webkit-box-shadow: 0px 0px 20px 2px #fdc55d;
+          box-shadow: 0px 0px 20px 2px #fdc55d;
+}
+
+.book-info__buttons button.delete:active {
+  -webkit-box-shadow: 0px 0px 8px #f1bf61;
+          box-shadow: 0px 0px 8px #f1bf61;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  background-color: #227BE5;
+}
+
+h1 {
+  font-family: "Handlee", cursive;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 0.5rem;
+}
+
+main {
+  margin: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (345px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 345px);
+  gap: 2rem;
+}
+
+@media (max-width: 700px) {
+  main {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+/*# sourceMappingURL=main.css.map */
