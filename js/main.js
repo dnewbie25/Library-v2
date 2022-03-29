@@ -36,9 +36,9 @@ class Book {
 
   readBook(){
     if(this.read === false){
-      return 'x-mark'
-    }else{
-      return 'checked'
+      return ['x-mark', 'not-read']
+    }else if(this.read === true){
+      return ['checked', 'read']
     }
   }
 
@@ -57,8 +57,8 @@ class Book {
         </div>
         <div class="book-info__buttons">
           <p>Read?</p>
-          <button class="read">
-            <span class="${this.readBook()}" data-id="${this.bookID}">
+          <button class="${this.readBook()[1]}">
+            <span class="${this.readBook()[0]}" data-id="${this.bookID}">
             </span>
           </button>
           <button class="delete">Delete?</button>
@@ -96,6 +96,10 @@ class App {
     this.closeNewBookForm();
     submitNewBookBtn.addEventListener('click', this.createBook.bind(this));
     this.myStorage = window.localStorage;
+    // update the read message
+    document.addEventListener('click', this.updateReadStatus.bind(this));
+    // deletes the book
+    document.addEventListener('click', this.deleteBook.bind(this));
   }
   getList() {
     console.log(this.booksList);
@@ -164,6 +168,48 @@ class App {
 
   addToLocalStorage(book){
     window.localStorage.setItem(book['bookID'], JSON.stringify(book));
+  }
+
+  updateReadStatus(e){
+    const element = e.target;
+      if(element.classList.contains('x-mark') || element.classList.contains('checked')){
+        const id = element.getAttribute('data-id');
+        const parentID = element.parentNode.parentNode.parentNode.parentNode.getAttribute('book-id');
+        const parentBtn = element.parentNode;
+        if(id === parentID){
+          if(element.classList.contains('x-mark')){
+            element.classList.remove('x-mark');
+            element.classList.add('checked');
+            parentBtn.classList.remove('not-read');
+            parentBtn.classList.add('read');
+            this.booksList.forEach(book=>{
+              if (String(book.bookID) === parentID){
+                book.read = true;
+              }
+            });
+          }else if(element.classList.contains('checked')){
+            element.classList.add('x-mark');
+            element.classList.remove('checked');
+            parentBtn.classList.remove('read');
+            parentBtn.classList.add('not-read');
+            this.booksList.forEach(book=>{
+              if (String(book.bookID) === parentID){
+                book.read = false;
+              }
+            });
+          }
+        }
+      }
+  }
+
+  deleteBook(e){
+    const element = e.target;
+    if (element.classList.contains('delete')){
+      const parentElement = element.parentNode.parentNode.parentNode;
+      const index = this.booksList.findIndex(book=>String(book.bookID) === parentElement.getAttribute('book-id'));
+      this.booksList.splice(index, 1);
+    }
+    this.renderBooks();
   }
 }
 
