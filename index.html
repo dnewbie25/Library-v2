@@ -12,8 +12,31 @@
 
 <body>
   <h1>My Own Library</h1>
+  <button id="add-book">Add Book</button>
+  <div id="form-background">
+    <form id="form">
+      <button id="close-btn">X</button>
+      <div>
+        <label for="title">Title</label>
+        <input type="text" placeholder="Title..." id="title-input" required>
+      </div>
+      <div>
+        <label for="author">Author</label>
+        <input type="text" placeholder="Author..." id="author-input" required>
+      </div>
+      <div>
+        <label for="read">Read?</label>
+        <input type="checkbox" placeholder="Read..." id="read-input">
+      </div>
+      <div>
+        <label for="pages">Number of Pages</label>
+        <input type="number" placeholder="Number of pages..." id="pages-input">
+      </div>
+      <input type="submit" value="Add Book" id="submit-button">
+    </form>
+  </div>
   <main>
-    <div class="book" book-id="">
+    <!-- <div class="book" book-id="">
       <div class="book-title">Book Name Goes Here</div>
       <div class="book-info">
         <div class="book-info__data">
@@ -29,7 +52,7 @@
           <button class="delete">Delete?</button>
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
   <script src="./js/main.js"></script>
 </body>
