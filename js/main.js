@@ -13,17 +13,19 @@ const submitNewBookBtn = document.querySelector('#submit-button');
 const main =document.querySelector('main');
 
 class Book {
-  constructor(author, title, read, numberOfPages = 0) {
+  constructor(author, title, read, numberOfPages = 0, bookID = undefined) {
     this.author = author;
     this.title = title;
     this.read = read;
     this.numberOfPages = numberOfPages;
-    this.bookID;
+    this.bookID = bookID;
     this.#generateID();
   }
 
   #generateID() {
-    this.bookID = Math.trunc(Math.random() * new Date().getTime());
+    if(this.bookID === undefined){
+      this.bookID = Math.trunc(Math.random() * new Date().getTime());
+    }
   }
 
   displayPages(){
@@ -68,38 +70,23 @@ class Book {
     main.appendChild(book);
   }
 
-  // updateReadValue(e){
-  //   const parentButton = e.target.parentElement;
-  //   if(parentButton.classList.contains('read')){
-  //     if (e.target.getAttribute('data-id') === this.bookID){
-  //       if (e.target.classList.contains('checked')){
-  //         e.target.classList.remove('checked');
-  //         e.target.classList.add('x-mark');
-  //         this.bookID = false;
-  //       }else if(e.target.classList.contains('x-mark')){
-  //         e.target.classList.add('checked');
-  //         e.target.classList.remove('x-mark');
-  //         this.bookID = true;
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 const book = new Book();
 
 class App {
   constructor() {
-    // hacer que el ID quede como en bookList[id], convertir a un object y que el id sea la llave. Luego en la clase Book hacer que se agregue al DOM y hacer las interacciones con los botones de cada una 
     this.booksList = [];
     this.openNewBookForm();
     this.closeNewBookForm();
     submitNewBookBtn.addEventListener('click', this.createBook.bind(this));
-    this.myStorage = window.localStorage;
+    window.localStorage.setItem('data', []);
     // update the read message
     document.addEventListener('click', this.updateReadStatus.bind(this));
     // deletes the book
     document.addEventListener('click', this.deleteBook.bind(this));
+    this.readLocalStorage();
+    this.renderBooks();
   }
   getList() {
     console.log(this.booksList);
@@ -143,8 +130,6 @@ class App {
       numOfPages.value
     );
     this.booksList.push(book);
-    // this.addToLocalStorage();
-    // localstorage set, but i need to render each book saved there and then remove it from the DOM and the localstorage
     this.renderBooks();
     // clears fields
     title.value = "";
@@ -167,7 +152,7 @@ class App {
   }
 
   addToLocalStorage(book){
-    window.localStorage.setItem(book['bookID'], JSON.stringify(book));
+    window.localStorage.setItem(book.bookID,JSON.stringify(book));
   }
 
   updateReadStatus(e){
@@ -185,6 +170,7 @@ class App {
             this.booksList.forEach(book=>{
               if (String(book.bookID) === parentID){
                 book.read = true;
+                this.addToLocalStorage(book);
               }
             });
           }else if(element.classList.contains('checked')){
@@ -195,6 +181,7 @@ class App {
             this.booksList.forEach(book=>{
               if (String(book.bookID) === parentID){
                 book.read = false;
+                this.addToLocalStorage(book);
               }
             });
           }
@@ -208,8 +195,27 @@ class App {
       const parentElement = element.parentNode.parentNode.parentNode;
       const index = this.booksList.findIndex(book=>String(book.bookID) === parentElement.getAttribute('book-id'));
       this.booksList.splice(index, 1);
+      window.localStorage.removeItem(parentElement.getAttribute('book-id'));
     }
     this.renderBooks();
+  }
+
+  readLocalStorage(){
+    if(window.localStorage.length > 0){
+      for(const key in window.localStorage){
+        if(Number.isFinite(Number(key))){
+          // this.booksList.push(JSON.parse(localStorage[key]))
+          const book = JSON.parse(window.localStorage[key]);
+          this.booksList.push(new Book(
+            book.author,
+            book.title,
+            book.read,
+            book.numOfPages,
+            book.bookID
+          ));
+        }
+      }
+    }
   }
 }
 
